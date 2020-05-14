@@ -36,12 +36,12 @@ def main():
 
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-    updater = Updater(token="851409198:AAE6YmG7XbLdraseTLBGSXQqskstAGZwQtQ", use_context=True)
+    updater = Updater(token="", use_context=True)
     dispatcher = updater.dispatcher
 
     dispatcher.add_handler(CommandHandler("start", start))
     dispatcher.add_handler(MessageHandler(Filters.photo, pad_image))
-    dispatcher.add_handler(MessageHandler(~Filters.photo, warn_user))
+    dispatcher.add_handler(MessageHandler(~Filters.photo & (~Filters.command), warn_user))
 
     updater.start_polling()
     updater.idle()
